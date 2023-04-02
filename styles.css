@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    margin: 50px;
+    gap: 100px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.translated-container__translated-text {
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+}

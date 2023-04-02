@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./styles.css" />
+        <script type="module" src="./script.js" defer></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <form>
+            <label for="toTranslateInput">English</label>
+            <textarea
+                id="toTranslateInput"
+                cols="30"
+                rows="10"
+                placeholder="enter English text here"
+                required
+            ></textarea>
+            <input type="submit" id="translateButton" value="translate" />
+        </form>
+
+        <div class="translated-container">
+            <h2 class="tanslated-container__heading">Morse Code</h2>
+            <p
+                id="outputArea"
+                class="translated-container__translated-text"
+            ></p>
+        </div>
+    </body>
+</html>

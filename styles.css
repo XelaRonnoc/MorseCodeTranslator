@@ -10,7 +10,8 @@ form {
 }
 
 .translated-container__translated-text {
-    width: 200px;
+    width: 600px;
     height: 200px;
     border: 2px solid black;
+    font-size: 36px;
 }

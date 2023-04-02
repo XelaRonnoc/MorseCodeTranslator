@@ -5,8 +5,16 @@ body {
 }
 
 form {
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
+}
+
+h2 {
+    margin: 0px;
+}
+p {
+    margin: 5px;
 }
 
 .translated-container__translated-text {

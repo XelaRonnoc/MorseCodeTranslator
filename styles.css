@@ -1,25 +1,29 @@
 body {
-    display: flex;
-    margin: 50px;
-    gap: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  gap: 100px;
 }
 
 form {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
+  text-align: center;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
-    margin: 0px;
+.translated-container {
+  text-align: center;
 }
-p {
-    margin: 5px;
+.translated-container__heading {
+  margin: 0px;
 }
-
 .translated-container__translated-text {
-    width: 600px;
-    height: 200px;
-    border: 2px solid black;
-    font-size: 36px;
+  text-align: left;
+  width: 600px;
+  height: 200px;
+  border: 2px solid black;
+  font-size: 36px;
+  margin: 5px;
 }

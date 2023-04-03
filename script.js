@@ -1,5 +1,6 @@
 const inputForm = document.querySelector("form");
-
+const toggleBtn = document.querySelector("#toggleTranslationBtn");
+let state = "englishMorse";
 const outputArea = document.getElementById("outputArea");
 
 const charToMorse = (char) => {
@@ -141,8 +142,28 @@ const translateToMorse = (input) => {
 
 inputForm.addEventListener("submit", (e) => {
     const inputText = document.getElementById("toTranslateInput").value;
-
-    outputArea.innerHTML = translateToMorse(inputText.toUpperCase());
+    if (state === "englishMorse") {
+        outputArea.innerHTML = translateToMorse(inputText.toUpperCase());
+    } else if (state === "morseEnglish") {
+        console.log("morseToEnglish");
+    }
     e.preventDefault();
-    e.stopPropigation();
+    e.stopPropagation;
+});
+
+const switchTranslation = (curState) => {
+    const label = document.querySelector("label");
+    if (curState === "englishMorse") {
+        label.innerHTML = "Morse";
+        return "morseEnglish";
+    } else if (curState === "morseEnglish") {
+        label.innerHTML = "English";
+        return "englishMorse";
+    } else {
+        console.log("something went wrong");
+    }
+};
+
+toggleBtn.addEventListener("click", (e) => {
+    state = switchTranslation(state);
 });

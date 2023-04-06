@@ -1,5 +1,16 @@
+export const cannotTranslateCharError = new Error("Cannot Translate Char");
+export const emptyStringError = new Error("input cannot be an empty string");
+export const noInputError = new Error("at least one paramter must be passed");
+
 export const charToEnglish = (char) => {
-    switch (char) {
+    if (char === "") {
+        throw emptyStringError;
+    }
+    if (!char) {
+        throw noInputError;
+    }
+    const cleanChar = char.trim();
+    switch (cleanChar) {
         case ".-":
             return "A";
         case "-...":
@@ -116,25 +127,42 @@ export const charToEnglish = (char) => {
             return "";
 
         default:
-            return "cannotTranslateChar";
+            throw cannotTranslateCharError;
     }
 };
 
 export const wordToEnglish = (word) => {
-    const charArr = word.split(" ");
+    if (word === "") {
+        throw emptyStringError;
+    }
+    if (!word) {
+        throw noInputError;
+    }
+    const cleanWord = word.trim();
+    const charArr = cleanWord.split(" ");
 
-    const translatedCharArr = charArr.map((item) => {
-        return charToEnglish(item);
-    });
+    const translatedCharArr = charArr
+        .filter((item) => item)
+        .map((item) => {
+            return charToEnglish(item);
+        });
 
     return translatedCharArr.join("");
 };
 
 export const translateToEnglish = (input) => {
+    if (input === "") {
+        throw emptyStringError;
+    }
+    if (!input) {
+        throw noInputError;
+    }
     const wordArr = input.split("   ");
 
-    const translatedWordArr = wordArr.map((item) => {
-        return wordToEnglish(item);
-    });
+    const translatedWordArr = wordArr
+        .filter((item) => item)
+        .map((item) => {
+            return wordToEnglish(item);
+        });
     return translatedWordArr.join(" ");
 };

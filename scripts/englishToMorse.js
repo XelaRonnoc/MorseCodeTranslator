@@ -1,4 +1,16 @@
+import {
+    cannotTranslateCharError,
+    emptyStringError,
+    noInputError,
+} from "./morseToEnglish.js";
+
 export const charToMorse = (char) => {
+    if (char === "") {
+        throw emptyStringError;
+    }
+    if (!char) {
+        throw noInputError;
+    }
     switch (char.toUpperCase()) {
         case "A":
             return ".-";
@@ -112,15 +124,18 @@ export const charToMorse = (char) => {
             return "-.-.--";
         case "$":
             return "...-..-";
-        case " ":
-            return "";
-
         default:
-            return "cannotTranslateChar";
+            throw cannotTranslateCharError;
     }
 };
 
 export const wordToMorse = (word) => {
+    if (word === "") {
+        throw emptyStringError;
+    }
+    if (!word) {
+        throw noInputError;
+    }
     const charArr = word.split("");
 
     const translatedCharArr = charArr.map((item) => {
@@ -132,11 +147,20 @@ export const wordToMorse = (word) => {
 };
 
 export const translateToMorse = (input) => {
+    if (input === "") {
+        throw emptyStringError;
+    }
+    if (!input) {
+        throw noInputError;
+    }
+
     const wordArr = input.split(" ");
 
-    const translatedWordArr = wordArr.map((item) => {
-        return wordToMorse(item);
-    });
+    const translatedWordArr = wordArr
+        .filter((item) => item)
+        .map((item) => {
+            return wordToMorse(item);
+        });
 
     const translatedSentance = translatedWordArr.join("&nbsp&nbsp&nbsp");
     return translatedSentance;

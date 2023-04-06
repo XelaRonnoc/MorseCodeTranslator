@@ -3,6 +3,9 @@ import {
     translateToEnglish,
     charToEnglish,
     wordToEnglish,
+    cannotTranslateCharError,
+    noInputError,
+    emptyStringError,
 } from "./morseToEnglish.js";
 import {
     translateToMorse,
@@ -54,8 +57,24 @@ describe("Test that the char to morse function works as expected", () => {
         expect(charToMorse(".")).toBe(".-.-.-");
         expect(charToMorse("$")).toBe("...-..-");
     });
-    it("empty sting when space is passed to the function", () => {
-        expect(charToMorse(" ")).toBe("");
+    it("error when space or non-translatable morse is passed to the function", () => {
+        expect(() => {
+            charToMorse(" ");
+        }).toThrow(cannotTranslateCharError);
+        expect(() => {
+            charToMorse("-----.-.-.-..- ");
+        }).toThrow(cannotTranslateCharError);
+    });
+
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
     });
 });
 
@@ -73,34 +92,112 @@ describe("Test that the char to english function works as expected", () => {
         expect(charToEnglish("--..--")).toBe(",");
         expect(charToEnglish("..--..")).toBe("?");
     });
+    it("throws error if cannot translate char", () => {
+        expect(() => {
+            charToEnglish(">");
+        }).toThrow(cannotTranslateCharError);
+    });
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
+    });
 });
 
 describe("Test that the word to morse function works as expected", () => {
-    it(" returns correct english char when morse is passed to the function", () => {
+    it(" returns correct morse word when english is passed to the function", () => {
         expect(wordToMorse("$2Alex")).toBe("...-..- ..--- .- .-.. . -..-");
+    });
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
     });
 });
 
 describe("Test that the word to English function works as expected", () => {
-    it(" returns correct english char when morse is passed to the function", () => {
+    it(" returns correct morse word when english is passed to the function", () => {
         expect(wordToEnglish("...-..- ..--- .- .-.. . -..-")).toBe("$2ALEX");
+    });
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
     });
 });
 
 describe("Test that the translate to morse function works as expected", () => {
-    it(" returns correct english char when morse is passed to the function", () => {
+    it(" returns correct morse sentance when english is passed to the function", () => {
         expect(translateToMorse("My name is Alex I have $12")).toBe(
             "-- -.--&nbsp&nbsp&nbsp-. .- -- .&nbsp&nbsp&nbsp.. ...&nbsp&nbsp&nbsp.- .-.. . -..-&nbsp&nbsp&nbsp..&nbsp&nbsp&nbsp.... .- ...- .&nbsp&nbsp&nbsp...-..- .---- ..---"
         );
     });
+
+    it(" returns correct morse sentance when english is passed to the function with too many spaces", () => {
+        expect(translateToMorse("My    name is Alex   I have       $12")).toBe(
+            "-- -.--&nbsp&nbsp&nbsp-. .- -- .&nbsp&nbsp&nbsp.. ...&nbsp&nbsp&nbsp.- .-.. . -..-&nbsp&nbsp&nbsp..&nbsp&nbsp&nbsp.... .- ...- .&nbsp&nbsp&nbsp...-..- .---- ..---"
+        );
+    });
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
+    });
 });
 
 describe("Test that the translate to morse function works as expected", () => {
-    it(" returns correct english char when morse is passed to the function", () => {
+    it(" returns correct english sentance when morse is passed to the function", () => {
         expect(
             translateToEnglish(
                 "-- -.--   -. .- -- .   .. ...   .- .-.. . -..-   ..   .... .- ...- .   ...-..- .---- ..---"
             )
         ).toBe("MY NAME IS ALEX I HAVE $12");
+    });
+
+    it("returns correct english sentance when to many spaces in between words in the sentance 4+", () => {
+        expect(
+            translateToEnglish(
+                "-- -.--     -. .- -- .    .. ...   .- .-.. . -..-     ..   .... .- ...- .      ...-..- .---- ..---"
+            )
+        ).toBe("MY NAME IS ALEX I HAVE $12");
+    });
+
+    it("returns correct english sentance when to many spaces in between letters in the sentance 2", () => {
+        expect(
+            translateToEnglish(
+                "--  -.--     -. .- -- .    ..  ...   .-  .-.. . -..-     ..   .... .-  ...- .      ...-..- .---- ..---"
+            )
+        ).toBe("MY NAME IS ALEX I HAVE $12");
+    });
+
+    it("expect no input error if no input is passed to the fuction", () => {
+        expect(() => {
+            charToMorse();
+        }).toThrow(noInputError);
+    });
+    it("expect empty string error if an empty string is passed into the function", () => {
+        expect(() => {
+            charToMorse("");
+        }).toThrow(emptyStringError);
     });
 });

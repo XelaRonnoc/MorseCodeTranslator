@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    gap: 100px;
+}
+
+form {
+    text-align: center;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.translated-container {
+    text-align: center;
+
+    &__heading {
+        margin: 0px;
+    }
+    &__translated-text {
+        text-align: left;
+        width: 600px;
+        height: 200px;
+        border: 2px solid black;
+        font-size: 36px;
+        margin: 5px;
+    }
+}
